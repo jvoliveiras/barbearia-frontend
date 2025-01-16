@@ -17,7 +17,7 @@ const Empresas = () => {
 
     const fetchEmpresas = async () => {
       try {
-        const response = await axios.get("http://barbearia-backend-wheat.vercel.app/api/empresas", {});
+        const response = await axios.get("https://barbearia-backend-wheat.vercel.app/api/empresas", {});
         setEmpresas(response.data);
         setEmpresasFiltrados(response.data);
 

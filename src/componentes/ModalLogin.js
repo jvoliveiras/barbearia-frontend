@@ -10,7 +10,7 @@ const ModalLogin = ({open, onClose}) => {
     e.preventDefault();
     
     try {
-      const response = await axios.post('http://barbearia-backend-wheat.vercel.app/api/login', {
+      const response = await axios.post('https://barbearia-backend-wheat.vercel.app/api/login', {
         email,
         password,
       });
