@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
     if (token) {
       try {
-        const response = await axios.get("http://localhost:8000/api/validaToken", {
+        const response = await axios.get("http://barbearia-backend-wheat.vercel.app/api/validaToken", {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

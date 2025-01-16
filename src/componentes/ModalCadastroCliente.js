@@ -35,7 +35,7 @@ const ModalCadastroCliente = ({ open, onClose, setClientes }) => {
         setLoading(true);
 
         try {
-            const response = await axios.post(`http://localhost:8000/api/clientes/store`, formNovoCli);
+            const response = await axios.post(`http://barbearia-backend-wheat.vercel.app/api/clientes/store`, formNovoCli);
             console.log('Cliente salvo com sucesso:', response.data);
 
             Swal.fire({

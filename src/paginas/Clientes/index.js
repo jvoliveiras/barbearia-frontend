@@ -17,7 +17,7 @@ const Clientes = () => {
 
     const fetchClientes = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/clientes", {});
+        const response = await axios.get("http://barbearia-backend-wheat.vercel.app/api/clientes", {});
         setClientes(response.data);
         setClientesFiltrados(response.data);
 

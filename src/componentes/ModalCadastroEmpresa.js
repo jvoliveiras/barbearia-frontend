@@ -28,7 +28,7 @@ const ModalCadastroEmpresa = ({ open, onClose, setEmpresas }) => {
         setLoading(true);
 
         try {
-            const response = await axios.post(`http://localhost:8000/api/empresas/store`, formNovaEmpresa);
+            const response = await axios.post(`http://barbearia-backend-wheat.vercel.app/api/empresas/store`, formNovaEmpresa);
             console.log('Empresa salva com sucesso:', response.data);
 
             Swal.fire({
