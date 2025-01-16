@@ -13,7 +13,7 @@ function Login() {
       e.preventDefault();
   
       try {
-        const response = await axios.post('https://barbearia-backend-wheat.vercel.app/api/login', {
+        const response = await axios.post('https//localhost:8000/api/login', {
           email,
           password,
         });
