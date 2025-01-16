@@ -7,22 +7,25 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [logado, setLogado] = useState(false);
     const navigate = useNavigate();
   
     const realizarLogin = async (e) => {
       e.preventDefault();
   
       try {
-        const response = await axios.post('https//localhost:8000/api/login', {
+        const response = await axios.post('http://localhost:8000/api/login', {
           email,
           password,
         });
   
         localStorage.setItem('access_token', response.data.token);
+        setLogado(true)
 
-        console.log('logado com sucesso')
-  
-        navigate('/clientes')
+        setTimeout(()=> {
+          navigate('/clientes')
+        }, 1000)
+        
       } catch (error) {
         console.error('Erro ao fazer login', error);
       }

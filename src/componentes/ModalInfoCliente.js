@@ -17,7 +17,7 @@ const ModalInfoCliente = ({ open, onClose, cliente, setCliente}) => {
         setLoading(true);
 
         try {
-            const response = await axios.post(`https//localhost:8000/api/cartoes/carimbar`, { id: cartao_id });
+            const response = await axios.post(`http://localhost:8000/api/cartoes/carimbar`, { id: cartao_id });
             console.log('Cartao carimbado com sucesso:', response.data);
 
             const { cartao, newCartao, totalCortes, ultimoCorte } = response.data;
