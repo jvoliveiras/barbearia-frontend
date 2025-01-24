@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import BarraNavegacao from './componentes/BarraNavegacao';
 import Clientes from './paginas/Clientes';
 import Empresas from './paginas/Empresas';
@@ -12,6 +12,11 @@ function AppRoutes() {
       <AuthProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
+
+         <Route
+            path="/"
+            element={<Navigate to="/login" />}
+          /> 
 
           <Route path="/" element={<BarraNavegacao />}>
             <Route
