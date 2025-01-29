@@ -63,13 +63,14 @@ const ModalCadastroCliente = ({ open, onClose, setClientes }) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 600,
+        width: '90%', // Usa 90% da largura da tela
+        maxWidth: 600, // Define o máximo de largura para telas maiores
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
-        p: 4,
+        p: { xs: 2, sm: 4 }, // Ajusta o padding dependendo do tamanho da tela
     };
-
+    
     return (
         <Modal open={open} onClose={onClose}>
             <Box sx={style}>
