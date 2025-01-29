@@ -1,42 +1,40 @@
 import * as React from 'react';
 import { useContext } from 'react';
-import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
-import { Link, Outlet } from 'react-router-dom';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Button, MenuItem } from '@mui/material';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import Logo from './ConfigMaster/Logo';
 import MenuIcon from '@mui/icons-material/Menu';
-import ModalLogin from './ModalLogin';
 import { AuthContext } from './AuthContext';
 
 function BarraNavegacao() {
-  const [estadoModalLogin, setEstadoModalLogin] = React.useState(false);
   const { isMaster } = useContext(AuthContext);
+
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   console.log(isMaster, 'isMaster')
 
   const pages = [
     { label: 'Clientes', path: `clientes` },
   ];
 
-  if(isMaster == true){
+  if(isMaster === true){
     pages.push({label: 'Empresas', path: `empresas`})
   }
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
   };
 
   return (
@@ -111,39 +109,15 @@ function BarraNavegacao() {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-                <MenuItem key="Sair" onClick={e => setEstadoModalLogin(true)}>
-                  <Typography sx={{ textAlign: 'right' }}>Sair</Typography>
-                </MenuItem>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                
-                {/* <MenuItem key="Acesso ADM" onClick={e => setEstadoModalLogin(true)}>
-                  <Typography sx={{ textAlign: 'center' }}>Acesso ADM</Typography>
-                </MenuItem> */}
-            
-              </Menu>
+              <MenuItem key="Sair" onClick={handleLogout}>
+                <Typography sx={{ textAlign: 'right' }}>Sair</Typography>
+              </MenuItem>
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
 
       <Outlet />
-
-      <ModalLogin open={estadoModalLogin} onClose={e => setEstadoModalLogin(false)} /> 
 
     </>
   );

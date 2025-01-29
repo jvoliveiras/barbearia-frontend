@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Grid, TextField, Button, Typography, Paper, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../../componentes/AuthContext';
 
-const { setIsAuthenticated } = useContext(AuthContext);
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { validateToken } = useContext(AuthContext);
 
     const realizarLogin = async (e) => {
         e.preventDefault();
@@ -20,8 +21,8 @@ function Login() {
             });
 
             localStorage.setItem('access_token', response.data.token);
-            setIsAuthenticated(true);
 
+            await validateToken();
             navigate('/clientes');
 
         } catch (error) {

@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from 'axios';
-import { Navigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -24,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         if(response.data){
           setIsAuthenticated(true); 
 
-          if(response.data.empresa_id == 1){
+          if(response.data.empresa_id === 1){
             setIsMaster(true);
           } else {
             setIsMaster(false)
@@ -47,14 +46,20 @@ export const AuthProvider = ({ children }) => {
       setLoading(false); 
     }
 
-    };
+  };
+
+  const logout = () => {
+    localStorage.removeItem("access_token");
+    setIsAuthenticated(false);
+    setIsMaster(false);
+  };
 
   useEffect(() => {
     validateToken();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, isMaster, loading }}>
+    <AuthContext.Provider value={{ isAuthenticated, isMaster, loading, validateToken, logout }}>
       {children}
     </AuthContext.Provider>
   );
