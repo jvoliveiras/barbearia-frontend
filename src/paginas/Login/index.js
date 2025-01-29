@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Grid, TextField, Button, Typography, Paper, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
+const { setIsAuthenticated } = useContext(AuthContext);
+
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [logado, setLogado] = useState(false);
     const navigate = useNavigate();
 
     const realizarLogin = async (e) => {
@@ -19,11 +20,10 @@ function Login() {
             });
 
             localStorage.setItem('access_token', response.data.token);
-            setLogado(true);
+            setIsAuthenticated(true);
 
-            setTimeout(() => {
-                navigate('/clientes');
-            }, 1500);
+            navigate('/clientes');
+
         } catch (error) {
             console.error('Erro ao fazer login', error);
         }
